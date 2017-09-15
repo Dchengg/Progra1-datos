@@ -1,0 +1,16 @@
+A01;TR01;Ana
+A01;TR02;Clara
+A01;TR03;Steven
+A01;TR04;Andres
+A01;TR05;Kristin
+A01;TR06;Ana
+A01;TR01;Jake
+A01;TR02;Audra
+A01;TR03;Jocelyn
+A01;TR04;Josh
+A01;TR05;Ivannia
+A01;TR01;Jocelyn
+A01;TR02;Carolina
+A01;TR03;Laura
+A01;TR04;Josh
+A01;TR01;Kristin

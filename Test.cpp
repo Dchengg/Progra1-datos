@@ -1,23 +1,25 @@
-
 #include <iostream>
+#include <string>
+#include <fstream>
+
 using namespace std;
 
 class nodo_simple {
 public:
-	nodo_simple(int v)
+	nodo_simple(string v)
 	{
 		valor = v;
 		siguiente = NULL;
 	}
 
-	nodo_simple(int v, nodo_simple * signodo)
+	nodo_simple(string v, nodo_simple * signodo)
 	{
 		valor = v;
 		siguiente = signodo;
 	}
 
 private:
-	int valor;
+	string valor;
 	nodo_simple *siguiente;
 
 
@@ -32,9 +34,9 @@ public:
 	lista() { primero = actual = NULL; }
 	~lista();
 
-	void InsertarInicio(int v);
-	void InsertarFinal(int v);
-	void InsertarPos(int v, int pos);
+	void InsertarInicio(string v);
+	void InsertarFinal(string v);
+	void InsertarPos(string v, int pos);
 	void EliminarInicio();
 	void EliminarFinal();
 	void EliminarPos(int pos);
@@ -49,8 +51,8 @@ public:
 	void BorrarInicio();
 	void borrarPosicion(int pos);
 	int largoLista();
-	void Buscar(int num);
-	void BuscarPos(int num, int pos);
+	void Buscar(string num);
+	void BuscarPos(string num, int pos);
 
 private:
 	pnodo_simple primero;
@@ -86,7 +88,7 @@ int lista::largoLista() {
 
 }
 
-void lista::InsertarInicio(int v)
+void lista::InsertarInicio(string v)
 {
 	if (ListaVacia())
 		primero = new nodo_simple(v);
@@ -94,7 +96,7 @@ void lista::InsertarInicio(int v)
 		primero = new nodo_simple(v, primero);
 }
 
-void lista::InsertarFinal(int v)
+void lista::InsertarFinal(string v)
 {
 	if (ListaVacia())
 		primero = new nodo_simple(v);
@@ -108,7 +110,7 @@ void lista::InsertarFinal(int v)
 }
 
 
-void lista::InsertarPos(int v, int pos)
+void lista::InsertarPos(string v, int pos)
 {
 	if (ListaVacia())
 		primero = new nodo_simple(v);
@@ -226,11 +228,11 @@ void lista::Siguiente()
 	if (actual) actual = actual->siguiente;
 }
 
-void lista::Buscar(int num)
+void lista::Buscar(string num)
 {
 	pnodo_simple aux = primero;
 	bool flag = false;
-	int n1;
+	string n1;
 	while (aux->siguiente != NULL) {
 		n1 = aux->valor;
 		if (n1 == num) {
@@ -243,10 +245,10 @@ void lista::Buscar(int num)
 		cout << "El numero " << num << " no esta en la lista" << endl;
 	}
 }
-void lista::BuscarPos(int num, int pos) {
+void lista::BuscarPos(string num, int pos) {
 	pnodo_simple aux = primero;
 	bool flag = false;
-	int n1;
+	string n1;
 	int cont = 0;
 	while (aux->siguiente != NULL)
 	{
@@ -496,17 +498,19 @@ void listaD::Mostrar()
 
 int main()
 {
-  lista Lista1;
-  listaD Lista2;
-  Lista1.InsertarFinal(2);
-  Lista1.InsertarFinal(3);
-  Lista1.InsertarInicio(9);
-  Lista1.Mostrar();
-
-  Lista2.InsertarFinal(4);
-  Lista2.InsertarFinal(5);
-  Lista2.InsertarInicio(45);
-  Lista2.Mostrar();
+	while (true){
+		string i;
+		cout<<"Ingrese el nombre del archivo: ";
+		cin >> i;
+		i = i+".txt";
+		lista Lista1;
+		std::ifstream file(i);
+		std::string str;
+		while (std::getline(file, str)) {
+			Lista1.InsertarFinal(str);
+		}
+		Lista1.Mostrar();
+	}
   cin.get();
   return 0;
 }

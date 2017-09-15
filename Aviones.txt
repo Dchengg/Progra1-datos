@@ -1,0 +1,8 @@
+A01;AE01;AB1;8;Aeronavegable
+A02;AE02;AC1;3;No-Aeronavegable
+A03;AE01;AD1;7;Aeronavegable
+A01;AE02;AB1;8;Aeronavegable
+A02;AE03;AF1;4;No-Aeronavegable
+A03;AE01;AG1;7;Aeronavegable
+A09;AE04;AH1;1;No-Aeronavegable
+A01;AE01;AI1;12;Aeronavegable
