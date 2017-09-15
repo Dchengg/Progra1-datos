@@ -1,6 +1,0 @@
-AE01;A01;Aerolinea1
-AE02;A01;Aerolinea2
-AE03;A02;Aerolinea3
-AE04;A03;Aerolinea4
-AE01;A09;Aerolinea5
-AE05;A01;Aerolinea6

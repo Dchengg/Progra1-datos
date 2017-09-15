@@ -1,8 +1,0 @@
-TR01;Trip1
-TR02;Trip2
-TR03;Trip3
-TR04;Trip4
-TR01;Trip5
-TR05;Trip6
-TR06;Trip7
-TR04;Trip8
