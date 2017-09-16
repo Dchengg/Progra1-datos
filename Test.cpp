@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <stdio.h>
+#include <string.h>
 
 using namespace std;
 
@@ -292,6 +294,7 @@ nodo_doble(int v, nodo_doble * signodo)
 
 
    friend class listaD;
+	 friend class listaDC;
 };
 
 typedef nodo_doble *pnodo_doble;
@@ -495,21 +498,156 @@ void listaD::Mostrar()
    }
    cout << endl;
 }
+class listaDC {
+   public:
+    listaDC() { primero = actual = NULL; }
+    ~listaDC();
+
+    void InsertarInicio(int v);
+    void InsertarFinal(int v);
+    void InsertarPos (int v, int pos);
+    void EliminarInicio();
+    void EliminarFinal();
+    void EliminarPos(int pos);
+    bool ListaVacia() { return primero == NULL; }
+    void Imprimir();
+    void Borrar(int v);
+    void Mostrar();
+    void BorrarFinal();
+    void BorrarInicio();
+    void borrarPosicion(int pos);
+    void Confirmar();
+
+   private:
+    pnodo_doble primero;
+    pnodo_doble actual;
+};
+
+listaDC::~listaDC()
+{
+   pnodo_doble aux;
+
+   while(primero) {
+      aux = primero;
+      primero = primero->siguiente;
+      delete aux;
+   }
+   actual = NULL;
+}
+void listaDC::InsertarInicio(int v)
+{
+   if (ListaVacia())
+   {
+     pnodo_doble nuevo= new nodo_doble(v);
+     primero = nuevo;
+     nuevo->siguiente=primero;
+     nuevo->anterior=primero;
+   }
+   else
+   {
+    pnodo_doble nuevo= new nodo_doble(v);
+    pnodo_doble aux=primero;
+    while (aux->siguiente!=primero)
+       aux= aux->siguiente;
+    nuevo->siguiente=primero;
+    primero->anterior = nuevo;
+    nuevo->anterior = aux;
+    aux->siguiente=nuevo;
+    primero=nuevo;
+   }
+}
+void listaDC::InsertarFinal(int v)
+{
+   if (ListaVacia())
+   {
+     pnodo_doble nuevo= new nodo_doble(v);
+     primero = nuevo;
+     nuevo->siguiente=primero;
+     nuevo->anterior = primero;
+   }
+   else
+   {
+      pnodo_doble nuevo=new nodo_doble(v);
+      pnodo_doble aux = primero;
+      while (aux->siguiente!=primero)
+         aux= aux->siguiente;
+      nuevo->siguiente= primero;
+      primero->anterior = nuevo;
+      nuevo->anterior= aux;
+      aux->siguiente= nuevo;
+
+
+   }
+}
+
+
+void listaDC::InsertarPos(int v,int pos)
+{
+ if (ListaVacia())
+ {
+   pnodo_doble nuevo= new nodo_doble(v);
+   primero = nuevo;
+   nuevo->siguiente=primero;
+   nuevo->anterior = primero;
+ }
+ else
+ {
+   if(pos <=1)
+   {
+     InsertarInicio(v);
+   }
+   else
+   {
+     pnodo_doble aux= primero;
+     int i =2;
+     while((i != pos )&&(aux->siguiente!= primero))
+     {
+        i++;
+        aux=aux->siguiente;
+     }
+     pnodo_doble nuevo= new nodo_doble(v);
+     nuevo->siguiente=aux->siguiente;
+     nuevo->siguiente->anterior = nuevo;
+     aux->siguiente=nuevo;
+     nuevo->anterior = aux;
+    }
+  }
+}
+void listaDC::Mostrar()
+{
+   pnodo_doble aux=primero;
+   while(aux->siguiente!=primero)
+     {
+
+      cout << aux->valor << "-> ";
+      aux = aux->siguiente;
+     }
+     cout<<aux->valor<<"->";
+     cout<<endl;
+}
 
 int main()
 {
 	while (true){
 		string i;
+		string p;
 		cout<<"Ingrese el nombre del archivo: ";
 		cin >> i;
 		i = i+".txt";
-		lista Lista1;
 		std::ifstream file(i);
 		std::string str;
 		while (std::getline(file, str)) {
-			Lista1.InsertarFinal(str);
+			lista Lista1;
+			char seps[] = ";";
+			char *token;
+			token = strtok( &str[0], seps );
+			while( token != NULL )
+			{
+				 Lista1.InsertarFinal(token);
+				 token = strtok( NULL, seps );
+			}
+			Lista1.Mostrar();
 		}
-		Lista1.Mostrar();
 	}
   cin.get();
   return 0;
