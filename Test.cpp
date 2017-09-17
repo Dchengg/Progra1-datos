@@ -55,6 +55,7 @@ public:
 	int largoLista();
 	void Buscar(string num);
 	void BuscarPos(string num, int pos);
+	void split(string txt);
 
 private:
 	pnodo_simple primero;
@@ -272,23 +273,43 @@ void lista::BuscarPos(string num, int pos) {
 		cout << "El numero " << num << " no esta en la lista" << endl;
 	}
 }
+void lista::split(string txt){
+	string split;
+	std::ifstream file(txt);
+	std::string str;
+	while (std::getline(file, str)) {
+		char seps[] = ";";
+		char *token;
+		string agencia;
+		token = strtok(&str[0],seps );
+		agencia = agencia + token + ":";
+		token = strtok( NULL, seps );
+		while( token != NULL )
+		{
+			agencia = agencia + token;
+			token = strtok( NULL, seps );
+		}
+		InsertarFinal(agencia);
+	}
+	Mostrar();
+}
 class nodo_doble {
    public:
-    nodo_doble(int v)
+    nodo_doble(string v)
     {
        valor = v;
        siguiente = NULL;
        anterior = NULL;
     }
 
-nodo_doble(int v, nodo_doble * signodo)
+nodo_doble(string v, nodo_doble * signodo)
     {
        valor = v;
        siguiente = signodo;
     }
 
    private:
-    int valor;
+    string valor;
     nodo_doble *siguiente;
     nodo_doble *anterior;
 
@@ -304,21 +325,22 @@ class listaD {
     listaD() { primero = actual = NULL; }
     ~listaD();
 
-    void InsertarInicio(int v);
-    void InsertarFinal(int v);
-    void InsertarPos (int v, int pos);
+    void InsertarInicio(string v);
+    void InsertarFinal(string v);
+    void InsertarPos (string v, int pos);
     void EliminarInicio();
     void EliminarFinal();
     void EliminarPos(int pos);
     bool ListaVacia() { return primero == NULL; }
     void Imprimir();
-    void Borrar(int v);
+    void Borrar(string v);
     void Mostrar();
     void BorrarFinal();
     void BorrarInicio();
     void borrarPosicion(int pos);
     int largoLista();
     void Confirmar();
+		void split(string txt);
 
    private:
     pnodo_doble primero;
@@ -354,7 +376,7 @@ int listaD::largoLista(){
 
 }
 
-void listaD::InsertarInicio(int v)
+void listaD::InsertarInicio(string v)
 {
    if (ListaVacia())
      primero = new nodo_doble(v);
@@ -365,7 +387,7 @@ void listaD::InsertarInicio(int v)
    }
 }
 
-void listaD::InsertarFinal(int v)
+void listaD::InsertarFinal(string v)
 {
    if (ListaVacia())
      primero = new nodo_doble(v);
@@ -379,7 +401,7 @@ void listaD::InsertarFinal(int v)
 }
 
 
-void listaD::InsertarPos(int v,int pos)
+void listaD::InsertarPos(string v,int pos)
 {
    if (ListaVacia())
      primero = new nodo_doble(v);
@@ -451,7 +473,7 @@ void listaD:: borrarPosicion(int pos)
 {
      if(ListaVacia())
      {
-              cout << "Lista vacia" <<endl;
+        cout << "Lista vacia" <<endl;
      }
      else
      {
@@ -498,25 +520,47 @@ void listaD::Mostrar()
    }
    cout << endl;
 }
+void listaD::split(string txt){
+	string split;
+	std::ifstream file(txt);
+	std::string str;
+	while (std::getline(file, str)) {
+		char seps[] = ";";
+		char *token;
+		string agencia;
+		token = strtok(&str[0],seps );
+		agencia = agencia + token + ":";
+		token = strtok( NULL, seps );
+		while( token != NULL )
+		{
+			agencia = agencia + token;
+			token = strtok( NULL, seps );
+		}
+		InsertarFinal(agencia);
+	}
+	Mostrar();
+}
+
 class listaDC {
    public:
     listaDC() { primero = actual = NULL; }
     ~listaDC();
 
-    void InsertarInicio(int v);
-    void InsertarFinal(int v);
-    void InsertarPos (int v, int pos);
+    void InsertarInicio(string v);
+    void InsertarFinal(string v);
+    void InsertarPos (string v, int pos);
     void EliminarInicio();
     void EliminarFinal();
-    void EliminarPos(int pos);
+    void EliminarPos(string pos);
     bool ListaVacia() { return primero == NULL; }
     void Imprimir();
-    void Borrar(int v);
+    void Borrar(string v);
     void Mostrar();
     void BorrarFinal();
     void BorrarInicio();
     void borrarPosicion(int pos);
     void Confirmar();
+		void split(string txt);
 
    private:
     pnodo_doble primero;
@@ -534,7 +578,7 @@ listaDC::~listaDC()
    }
    actual = NULL;
 }
-void listaDC::InsertarInicio(int v)
+void listaDC::InsertarInicio(string v)
 {
    if (ListaVacia())
    {
@@ -556,7 +600,7 @@ void listaDC::InsertarInicio(int v)
     primero=nuevo;
    }
 }
-void listaDC::InsertarFinal(int v)
+void listaDC::InsertarFinal(string v)
 {
    if (ListaVacia())
    {
@@ -581,7 +625,7 @@ void listaDC::InsertarFinal(int v)
 }
 
 
-void listaDC::InsertarPos(int v,int pos)
+void listaDC::InsertarPos(string v,int pos)
 {
  if (ListaVacia())
  {
@@ -625,30 +669,69 @@ void listaDC::Mostrar()
      cout<<aux->valor<<"->";
      cout<<endl;
 }
-
+void listaDC::split(string txt){
+	string split;
+	std::ifstream file(txt);
+	std::string str;
+	while (std::getline(file, str)) {
+		char seps[] = ";";
+		char *token;
+		string agencia;
+		token = strtok(&str[0],seps );
+		agencia = agencia + token + ":";
+		token = strtok( NULL, seps );
+		while( token != NULL )
+		{
+			agencia = agencia + token+":";
+			token = strtok( NULL, seps );
+		}
+		InsertarFinal(agencia);
+	}
+	Mostrar();
+}
 int main()
 {
-	while (true){
-		string i;
-		string p;
-		cout<<"Ingrese el nombre del archivo: ";
-		cin >> i;
-		i = i+".txt";
-		std::ifstream file(i);
-		std::string str;
-		while (std::getline(file, str)) {
-			lista Lista1;
-			char seps[] = ";";
-			char *token;
-			token = strtok( &str[0], seps );
-			while( token != NULL )
-			{
-				 Lista1.InsertarFinal(token);
-				 token = strtok( NULL, seps );
-			}
-			Lista1.Mostrar();
-		}
-	}
-  cin.get();
-  return 0;
+	listaDC Lista_Clientes, Lista_Aerolineas, Lista_Aviones,Lista_Rutas,Lista_Funcionarios,Lista_Tripulacion,Lista_Vuelos;
+	listaD Lista_TripulaVuela,Lista_AsignacionVuelos,Lista_ClientesVuelo;
+	lista Lista_Trips, Lista_Destinos;
+	cout<<"_____________________________________________"<<endl;
+
+	Lista_Clientes.split("Agencias.txt");
+	cout<<"_____________________________________________"<<endl;
+
+	Lista_Aerolineas.split("Aerolineas.txt");
+	cout<<"_____________________________________________"<<endl;
+
+	Lista_Aviones.split("Aviones.txt");
+	cout<<"_____________________________________________"<<endl;
+
+	Lista_Rutas.split("Rutas.txt");
+	cout<<"_____________________________________________"<<endl;
+
+	Lista_Trips.split("Trip.txt");
+	cout<<"_____________________________________________"<<endl;
+
+	Lista_Funcionarios.split("Funcionarios.txt");
+	cout<<"_____________________________________________"<<endl;
+
+	Lista_Tripulacion.split("Tripulacion.txt");
+	cout<<"_____________________________________________"<<endl;
+
+	Lista_Vuelos.split("Vuelos.txt");
+	cout<<"_____________________________________________"<<endl;
+
+	Lista_Destinos.split("Destinos.txt");
+	cout<<"_____________________________________________"<<endl;
+
+	Lista_TripulaVuela.split("TripulaVuela.txt");
+	cout<<"_____________________________________________"<<endl;
+
+	Lista_AsignacionVuelos.split("Asignacion de Vuelos.txt");
+	cout<<"_____________________________________________"<<endl;
+
+	Lista_ClientesVuelo.split("ClientesVuelo.txt");
+	cout<<"_____________________________________________"<<endl;
+
+	cin.get();
+	return 0;
 }
